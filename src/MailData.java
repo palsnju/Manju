@@ -23,9 +23,9 @@ public class MailData {
 		
 		
 		//login credential
-		driver.findElement(By.xpath("//input[@id='identifierId']")).sendKeys("palsnju@gmail.com");
+		driver.findElement(By.xpath("//input[@id='identifierId']")).sendKeys(".....@gmail.com");
 		driver.findElement(By.xpath("//div[@id='identifierNext']")).click();
-		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("merabetu");
+		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("......");
 		driver.findElement(By.xpath("//div[@id='passwordNext']")).click();
 		
 		WebElement arrow=driver.findElement(By.xpath("//span[@class='T-Jo J-J5-Ji']//..//div[@class='G-asx T-I-J3 J-J5-Ji']"));
@@ -38,6 +38,7 @@ public class MailData {
 		
 		
 		List<WebElement>checkbox=driver.findElements(By.xpath("//div[@role='checkbox']"));
+		//keyword here prediction
 		String pre="PhonePe";
 		String mail;
 		System.out.println(checkbox.size());
@@ -45,12 +46,12 @@ public class MailData {
 		for(int i=1; i<=checkbox.size(); i++)
 		{
 			
-			WebElement tik=driver.findElement(By.xpath("//div[@role='checkbox']//..//..//..//tr["+i+"]//td[5]//div[2]"));
+		String tik=driver.findElement(By.xpath("//div[@role='checkbox']//..//..//..//tr[1]//td//div[@role='checkbox']")).getAttribute("aria-checked");
 			WebElement subject=driver.findElement(By.xpath("//div[@role='checkbox']//..//..//..//tr["+i+"]//td[5]//div[2]//span//span"));
 			
 			
-			
-			if(pre.equals(subject.getText()))
+			System.out.println(subject.getText());
+			if(tik.equals("true")&&pre.equals(subject.getText()))
 			{
 				
 				Actions b=new Actions(driver);
@@ -59,6 +60,8 @@ public class MailData {
 				mail=driver.findElement(By.xpath("//td[@class='c2']//h3//span[@class='go']")).getText();
 				
 				System.out.println(mail.replace("<", "").replace(">", ""));
+				
+				b.moveToElement(driver.findElement(By.xpath("//div[@data-tooltip='Back to Inbox']//div[@class='ar6 T-I-J3 J-J5-Ji']"))).click().build().perform();
 				
 				
 			}
